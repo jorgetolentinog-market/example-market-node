@@ -1,0 +1,41 @@
+service: market-node
+frameworkVersion: "2"
+useDotenv: true
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: ${env:AWS_REGION}
+  lambdaHashingVersion: "20201221"
+  apiGateway:
+    shouldStartNameWithService: true
+
+package:
+  individually: true
+
+custom:
+  serverless-offline:
+    useChildProcesses: true
+  webpack:
+    webpackConfig: ./webpack.config.js
+
+functions:
+  status-http-list:
+    handler: src/app.handler
+    events:
+      - http:
+          path: /status
+          method: GET
+          cors: true
+
+  health-http-list:
+    handler: src/app.handler
+    events:
+      - http:
+          path: /health
+          method: GET
+          cors: true

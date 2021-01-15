@@ -1,0 +1,29 @@
+{
+  "name": "market-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "serverless offline start --stage local",
+    "flow": "flow",
+    "webpack": "serverless webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "serverless-http": "^2.6.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-flow": "^7.12.1",
+    "babel-loader": "^8.2.2",
+    "flow-bin": "^0.142.0",
+    "serverless": "^2.19.0",
+    "serverless-offline": "^6.8.0",
+    "serverless-webpack": "^5.3.5",
+    "webpack": "^5.14.0"
+  }
+}
