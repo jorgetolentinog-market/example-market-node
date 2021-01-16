@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "lib": ["es2017"],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "removeComments": true,
+    "moduleResolution": "node",
+    "strict": true,
+    "sourceMap": true,
+    "target": "es2017",
+    "outDir": "lib",
+    "baseUrl": "./",
+    "paths": {
+      "@app/*": ["./src/*"]
+    }
+  },
+  "include": ["./**/*.ts"],
+  "exclude": [
+    "node_modules/**/*",
+    ".serverless/**/*",
+    ".webpack/**/*",
+    ".vscode/**/*"
+  ]
+}

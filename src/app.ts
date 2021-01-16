@@ -1,4 +1,3 @@
-// @flow
 import { prueba } from "@app/prueba";
 import { asyncHandler } from "@app/utils";
 import express from "express";
@@ -8,7 +7,7 @@ const app = express();
 
 app.get(
   "/status",
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (_req, res) => {
     let p = prueba();
 
     res.send({

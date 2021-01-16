@@ -31,11 +31,3 @@ functions:
           path: /status
           method: GET
           cors: true
-
-  health-http-list:
-    handler: src/app.handler
-    events:
-      - http:
-          path: /health
-          method: GET
-          cors: true
