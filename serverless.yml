@@ -24,10 +24,14 @@ custom:
     webpackConfig: ./webpack.config.js
 
 functions:
-  status-http-list:
-    handler: src/app.handler
+  product:
+    handler: src/lambda/product.handler
     events:
       - http:
-          path: /status
-          method: GET
+          path: /product
+          method: ANY
+          cors: true
+      - http:
+          path: /product/{proxy+}
+          method: ANY
           cors: true
