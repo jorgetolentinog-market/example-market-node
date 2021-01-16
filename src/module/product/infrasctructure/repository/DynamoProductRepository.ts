@@ -1,5 +1,10 @@
-import { Product, ProductId, ProductName } from "../../domain/product";
-import { ProductRepository } from "../../domain/repository";
+import {
+  Product,
+  ProductId,
+  ProductName,
+} from "@app/module/product/domain/product";
+import { ProductRepository } from "@app/module/product/domain/product-repository";
+import { v4 as uuidv4 } from "uuid";
 
 export class DynamoProductRepository implements ProductRepository {
   save(product: Product): void {
@@ -8,15 +13,15 @@ export class DynamoProductRepository implements ProductRepository {
 
   find(id: ProductId): Product[] {
     return [
-      new Product(new ProductId("1"), new ProductName("Name 1")),
-      new Product(new ProductId("2"), new ProductName("Name 2")),
+      new Product(new ProductId(uuidv4()), new ProductName("Name 1")),
+      new Product(new ProductId(uuidv4()), new ProductName("Name 2")),
     ];
   }
 
   findAll(): Product[] {
     return [
-      new Product(new ProductId("3"), new ProductName("Name 3")),
-      new Product(new ProductId("4"), new ProductName("Name 4")),
+      new Product(new ProductId(uuidv4()), new ProductName("Name 3")),
+      new Product(new ProductId(uuidv4()), new ProductName("Name 4")),
     ];
   }
 }

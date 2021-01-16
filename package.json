@@ -14,10 +14,12 @@
   "dependencies": {
     "express": "^4.17.1",
     "serverless-http": "^2.6.0",
-    "tiny-types": "^1.15.0"
+    "tiny-types": "^1.15.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.11",
+    "@types/uuid": "^8.3.0",
     "fork-ts-checker-webpack-plugin": "^6.1.0",
     "serverless": "^2.19.0",
     "serverless-offline": "^6.8.0",

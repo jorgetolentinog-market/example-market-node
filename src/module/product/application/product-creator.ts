@@ -1,5 +1,9 @@
-import { Product, ProductId, ProductName } from "../domain/product";
-import { ProductRepository } from "../domain/repository";
+import {
+  Product,
+  ProductId,
+  ProductName,
+} from "@app/module/product/domain/product";
+import { ProductRepository } from "@app/module/product/domain/product-repository";
 
 export class ProductCreator {
   constructor(private repository: ProductRepository) {}

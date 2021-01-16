@@ -5,7 +5,7 @@ import {
 } from "@app/module/product/application";
 import { ProductId, ProductName } from "@app/module/product/domain/product";
 import { DynamoProductRepository } from "@app/module/product/infrasctructure/repository";
-import { asyncHandler } from "@app/utils";
+import { asyncHandler } from "@app/shared/infrasctructure/express";
 import express from "express";
 import serverless from "serverless-http";
 
@@ -22,8 +22,8 @@ app.get(
   })
 );
 
-app.post(
-  "/product",
+app.get(
+  "/product/create",
   asyncHandler(async (req, res) => {
     let creator = new ProductCreator(productRepository);
     creator.create(new ProductId("myid"), new ProductName("myname"));

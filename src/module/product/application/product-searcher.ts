@@ -1,5 +1,5 @@
-import { Product } from "../domain/product";
-import { ProductRepository } from "../domain/repository";
+import { Product } from "@app/module/product/domain/product";
+import { ProductRepository } from "@app/module/product/domain/product-repository";
 
 export class ProductSearcher {
   constructor(private repository: ProductRepository) {}
