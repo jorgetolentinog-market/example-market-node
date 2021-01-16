@@ -2,8 +2,8 @@ import {
   Product,
   ProductId,
   ProductName,
-} from "@app/module/product/domain/product";
-import { ProductRepository } from "@app/module/product/domain/product-repository";
+} from "@module/product/domain/product";
+import { ProductRepository } from "@module/product/domain/product-repository";
 import { v4 as uuidv4 } from "uuid";
 
 export class DynamoProductRepository implements ProductRepository {

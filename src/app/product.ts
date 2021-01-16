@@ -2,10 +2,10 @@ import {
   ProductCreator,
   ProductFinder,
   ProductSearcher,
-} from "@app/module/product/application";
-import { ProductId, ProductName } from "@app/module/product/domain/product";
-import { DynamoProductRepository } from "@app/module/product/infrasctructure/repository";
-import { asyncHandler } from "@app/shared/infrasctructure/express";
+} from "@module/product/application";
+import { ProductId, ProductName } from "@module/product/domain/product";
+import { DynamoProductRepository } from "@module/product/infrasctructure/repository";
+import { asyncHandler } from "@shared/infrasctructure/express";
 import express from "express";
 import serverless from "serverless-http";
 

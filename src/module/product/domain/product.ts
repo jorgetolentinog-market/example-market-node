@@ -1,4 +1,4 @@
-import { ValueObject, UUID } from "@app/shared/domain/value-object";
+import { ValueObject, UUID } from "@shared/domain/value-object";
 
 export class ProductId extends UUID<"ProductId"> {}
 export class ProductName extends ValueObject<string, "ProductName"> {}
