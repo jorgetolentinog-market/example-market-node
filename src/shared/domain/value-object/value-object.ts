@@ -1,21 +1,22 @@
 export abstract class ValueObject<T, N extends string> {
   protected __nominal: N;
 
-  constructor(private _value: T) {
+  constructor(private readonly _value: T) {
     this.validate(_value);
   }
 
-  get value(): T {
+  value(): T {
     return this._value;
   }
-
-  set value(v: T) {
-    this._value = v;
-  }
-
-  validate(_: T) {}
 
   toJSON(): T {
-    return this._value;
+    return this.value();
   }
+
+  toString(): string {
+    console.log("asd")
+    return String(this.value());
+  }
+
+  protected validate(_: T) {}
 }

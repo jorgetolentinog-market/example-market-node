@@ -8,6 +8,7 @@ import { DynamoProductRepository } from "@module/product/infrasctructure/reposit
 import { asyncHandler } from "@shared/infrasctructure/express";
 import express from "express";
 import serverless from "serverless-http";
+import { v4 as uuidv4 } from "uuid";
 
 const app = express();
 
@@ -26,7 +27,7 @@ app.get(
   "/product/create",
   asyncHandler(async (req, res) => {
     let creator = new ProductCreator(productRepository);
-    creator.create(new ProductId("myid"), new ProductName("myname"));
+    creator.create(new ProductId(uuidv4()), new ProductName("myname"));
     res.send({
       create: true,
     });
