@@ -2,8 +2,8 @@ import {
   Product,
   ProductId,
   ProductName,
-} from "@module/product/domain/product";
-import { ProductRepository } from "@module/product/domain/product-repository";
+  ProductRepository,
+} from "@market/product/domain";
 
 export class ProductCreator {
   constructor(private repository: ProductRepository) {}

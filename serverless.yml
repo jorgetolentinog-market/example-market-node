@@ -26,13 +26,13 @@ custom:
 
 functions:
   product:
-    handler: src/app/product.handler
+    handler: src/app/market/app.handler
     events:
       - http:
-          path: /product
+          path: /market
           method: ANY
           cors: true
       - http:
-          path: /product/{proxy+}
+          path: /market/{proxy+}
           method: ANY
           cors: true

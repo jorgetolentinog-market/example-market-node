@@ -13,7 +13,7 @@
     "outDir": "lib",
     "baseUrl": "./",
     "paths": {
-      "@module/*": ["./src/module/*"],
+      "@market/*": ["./src/market/*"],
       "@shared/*": ["./src/shared/*"]
     }
   },

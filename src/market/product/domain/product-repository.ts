@@ -1,4 +1,5 @@
-import { Product, ProductId } from "./product";
+import { Product } from "./product";
+import { ProductId } from "./product-id";
 
 export interface ProductRepository {
   save(product: Product): void;

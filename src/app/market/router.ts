@@ -2,19 +2,18 @@ import {
   ProductCreator,
   ProductFinder,
   ProductSearcher,
-} from "@module/product/application";
-import { ProductId, ProductName } from "@module/product/domain/product";
-import { DynamoProductRepository } from "@module/product/infrasctructure/persistence";
+} from "@market/product/application";
+import { ProductId, ProductName } from "@market/product/domain";
+import { DynamoProductRepository } from "@market/product/infrasctructure/persistence";
 import { asyncHandler } from "@shared/infrasctructure/express";
 import express from "express";
-import serverless from "serverless-http";
 import { v4 as uuidv4 } from "uuid";
-
-const app = express();
 
 const productRepository = new DynamoProductRepository();
 
-app.get(
+const router = express.Router();
+
+router.get(
   "/product",
   asyncHandler(async (req, res) => {
     let searcher = new ProductSearcher(productRepository);
@@ -23,7 +22,7 @@ app.get(
   })
 );
 
-app.get(
+router.get(
   "/product/create",
   asyncHandler(async (req, res) => {
     let creator = new ProductCreator(productRepository);
@@ -34,7 +33,7 @@ app.get(
   })
 );
 
-app.get(
+router.get(
   "/product/:id",
   asyncHandler(async (req, res) => {
     let finder = new ProductFinder(productRepository);
@@ -43,4 +42,4 @@ app.get(
   })
 );
 
-export const handler = serverless(app);
+export { router };
