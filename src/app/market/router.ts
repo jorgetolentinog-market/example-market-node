@@ -14,6 +14,13 @@ const productRepository = new DynamoProductRepository();
 const router = express.Router();
 
 router.get(
+  "/health",
+  asyncHandler(async (req, res) => {
+    res.send({ market: true });
+  })
+);
+
+router.get(
   "/product",
   asyncHandler(async (req, res) => {
     let searcher = new ProductSearcher(productRepository);
