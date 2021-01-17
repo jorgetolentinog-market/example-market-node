@@ -1,4 +1,2 @@
-import { ValueObject } from "./value-object";
-import { UUID } from "./uuid";
-
-export { ValueObject, UUID };
+export { ValueObject } from "./value-object";
+export { UUID } from "./uuid";

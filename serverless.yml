@@ -19,10 +19,15 @@ package:
   individually: true
 
 custom:
-  serverless-offline:
-    useChildProcesses: true
   webpack:
     webpackConfig: ./webpack.config.js
+  serverless-offline:
+    useChildProcesses: true
+  dynamodb:
+    stages:
+      - local
+    start:
+      port: 8001
 
 functions:
   product:

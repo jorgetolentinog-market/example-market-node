@@ -1,6 +1,4 @@
-import { Product } from "./product";
-import { ProductId } from "./product-id";
-import { ProductName } from "./product-name";
-import { ProductRepository } from "./product-repository";
-
-export { Product, ProductId, ProductName, ProductRepository };
+export { Product } from "./product";
+export { ProductId } from "./product-id";
+export { ProductName } from "./product-name";
+export type { ProductRepository } from "./product-repository";

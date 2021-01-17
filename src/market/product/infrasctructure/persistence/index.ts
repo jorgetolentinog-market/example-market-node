@@ -1,2 +1,1 @@
-import { DynamoProductRepository } from "./DynamoProductRepository";
-export { DynamoProductRepository };
+export { DynamoProductRepository } from "./DynamoProductRepository";

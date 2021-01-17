@@ -24,7 +24,7 @@ router.get(
   "/product",
   asyncHandler(async (req, res) => {
     let searcher = new ProductSearcher(productRepository);
-    let result = searcher.search();
+    let result = await searcher.search();
     res.send(result);
   })
 );
@@ -33,7 +33,7 @@ router.get(
   "/product/create",
   asyncHandler(async (req, res) => {
     let creator = new ProductCreator(productRepository);
-    creator.create(new ProductId(uuidv4()), new ProductName("myname"));
+    await creator.create(new ProductId(uuidv4()), new ProductName("myname"));
     res.send({
       create: true,
     });
@@ -44,7 +44,7 @@ router.get(
   "/product/:id",
   asyncHandler(async (req, res) => {
     let finder = new ProductFinder(productRepository);
-    let result = finder.find(new ProductId(req.params.id));
+    let result = await finder.find(new ProductId(req.params.id));
     res.send(result);
   })
 );
