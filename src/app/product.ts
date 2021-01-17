@@ -4,7 +4,7 @@ import {
   ProductSearcher,
 } from "@module/product/application";
 import { ProductId, ProductName } from "@module/product/domain/product";
-import { DynamoProductRepository } from "@module/product/infrasctructure/repository";
+import { DynamoProductRepository } from "@module/product/infrasctructure/persistence";
 import { asyncHandler } from "@shared/infrasctructure/express";
 import express from "express";
 import serverless from "serverless-http";

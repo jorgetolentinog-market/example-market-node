@@ -4,6 +4,7 @@ useDotenv: true
 
 plugins:
   - serverless-webpack
+  - serverless-dynamodb-local
   - serverless-offline
 
 provider:

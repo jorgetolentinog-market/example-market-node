@@ -7,11 +7,13 @@
     "start": "serverless offline start --stage local",
     "check": "tsc --noEmit",
     "webpack": "serverless webpack",
+    "dynamodb:install": "serverless dynamodb install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.828.0",
     "express": "^4.17.1",
     "serverless-http": "^2.6.0",
     "tiny-types": "^1.15.0",
@@ -22,6 +24,7 @@
     "@types/uuid": "^8.3.0",
     "fork-ts-checker-webpack-plugin": "^6.1.0",
     "serverless": "^2.19.0",
+    "serverless-dynamodb-local": "^0.2.39",
     "serverless-offline": "^6.8.0",
     "serverless-webpack": "^5.3.5",
     "ts-loader": "^8.0.14",
