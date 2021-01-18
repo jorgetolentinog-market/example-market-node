@@ -1,9 +1,9 @@
 import { Product, ProductId, ProductRepository } from "@market/product/domain";
 
-export class ProductFinder {
+export class ProductSearcher {
   constructor(private repository: ProductRepository) {}
 
-  async find(id: ProductId): Promise<Product[]> {
-    return this.repository.find(id);
+  async search(id: ProductId): Promise<Product | undefined> {
+    return await this.repository.search(id);
   }
 }

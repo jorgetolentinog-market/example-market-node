@@ -2,9 +2,9 @@ import AWS from "aws-sdk";
 
 let options = {};
 
-if (process.env.stage === "local") {
+if (process.env.IS_OFFLINE) {
   options = {
-    endpoint: "http://localhost:8001",
+    endpoint: "http://localhost:8000",
     region: "localhost",
   };
 }

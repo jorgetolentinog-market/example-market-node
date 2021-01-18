@@ -10,12 +10,7 @@ export abstract class ValueObject<T, N extends string> {
   }
 
   toJSON(): T {
-    return this.value();
-  }
-
-  toString(): string {
-    console.log("asd")
-    return String(this.value());
+    return this._value;
   }
 
   protected validate(_: T) {}

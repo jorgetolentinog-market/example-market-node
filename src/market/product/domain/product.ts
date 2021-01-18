@@ -14,4 +14,11 @@ export class Product {
   name() {
     return this._name;
   }
+
+  toJSON() {
+    return {
+      id: this.id(),
+      name: this.name(),
+    };
+  }
 }

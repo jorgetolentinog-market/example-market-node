@@ -1,6 +1,6 @@
 import {
   ProductCreator,
-  ProductFinder,
+  ProductMatcher,
   ProductSearcher,
 } from "@market/product/application";
 import { ProductId, ProductName } from "@market/product/domain";
@@ -14,38 +14,32 @@ const productRepository = new DynamoProductRepository();
 const router = express.Router();
 
 router.get(
-  "/health",
+  "/product/:id",
   asyncHandler(async (req, res) => {
-    res.send({ market: true });
+    let action = new ProductSearcher(productRepository);
+    let result = await action.search(new ProductId(req.params.id));
+    res.send(result);
   })
 );
 
 router.get(
   "/product",
   asyncHandler(async (req, res) => {
-    let searcher = new ProductSearcher(productRepository);
-    let result = await searcher.search();
+    let action = new ProductMatcher(productRepository);
+    let result = await action.match();
     res.send(result);
   })
 );
 
-router.get(
-  "/product/create",
+router.post(
+  "/product",
   asyncHandler(async (req, res) => {
-    let creator = new ProductCreator(productRepository);
-    await creator.create(new ProductId(uuidv4()), new ProductName("myname"));
+    let identifier = uuidv4();
+    let action = new ProductCreator(productRepository);
+    await action.create(new ProductId(identifier), new ProductName("myname"));
     res.send({
-      create: true,
+      id: identifier,
     });
-  })
-);
-
-router.get(
-  "/product/:id",
-  asyncHandler(async (req, res) => {
-    let finder = new ProductFinder(productRepository);
-    let result = await finder.find(new ProductId(req.params.id));
-    res.send(result);
   })
 );
 

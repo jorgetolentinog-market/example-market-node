@@ -10,6 +10,6 @@ export class ProductCreator {
 
   async create(id: ProductId, name: ProductName): Promise<void> {
     let product = new Product(id, name);
-    this.repository.save(product);
+    await this.repository.save(product);
   }
 }

@@ -4,14 +4,11 @@ import {
   ProductName,
   ProductRepository,
 } from "@market/product/domain";
-import { v4 as uuidv4 } from "uuid";
-import { client as ddbClient } from "@shared/infrasctructure/dynamodb";
+import { client as document } from "@shared/infrasctructure/dynamodb";
 
 export class DynamoProductRepository implements ProductRepository {
   async save(product: Product) {
-    console.log("product", product);
-
-    await ddbClient
+    await document
       .put({
         TableName: "product",
         Item: {
@@ -22,17 +19,36 @@ export class DynamoProductRepository implements ProductRepository {
       .promise();
   }
 
-  async find(id: ProductId) {
-    return [
-      new Product(new ProductId(uuidv4()), new ProductName("Name 1")),
-      new Product(new ProductId(uuidv4()), new ProductName("Name 2")),
-    ];
+  async search(id: ProductId) {
+    let result = await document
+      .get({
+        TableName: "product",
+        Key: {
+          id: id.value(),
+        },
+      })
+      .promise();
+
+    if (!result.Item) {
+      return undefined;
+    }
+
+    return new Product(
+      new ProductId(result.Item.id),
+      new ProductName(result.Item.name)
+    );
   }
 
-  async findAll() {
-    return [
-      new Product(new ProductId(uuidv4()), new ProductName("Name 3")),
-      new Product(new ProductId(uuidv4()), new ProductName("Name 4")),
-    ];
+  async matching() {
+    let result = await document
+      .scan({
+        TableName: "product",
+        Limit: 1000,
+      })
+      .promise();
+
+    return result.Items!.map(
+      (item) => new Product(new ProductId(item.id), new ProductName(item.name))
+    );
   }
 }
