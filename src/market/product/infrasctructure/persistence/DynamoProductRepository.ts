@@ -1,35 +1,29 @@
-import {
-  Product,
-  ProductId,
-  ProductName,
-  ProductPrice,
-  ProductRepository,
-} from "@market/product/domain";
-import { client as document } from "@shared/infrasctructure/dynamodb";
+import { Product } from "@market/product/domain/product";
+import { ProductId } from "@market/product/domain/product-id";
+import { ProductName } from "@market/product/domain/product-name";
+import { ProductPrice } from "@market/product/domain/product-price";
+import { ProductRepository } from "@market/product/domain/product-repository";
+import { DynamoDBClient } from "@shared/infrasctructure/dynamodb";
 
 export class DynamoProductRepository implements ProductRepository {
   async save(product: Product) {
-    await document
-      .put({
-        TableName: "product",
-        Item: {
-          id: product.id().value(),
-          name: product.name().value(),
-          price: product.price().value(),
-        },
-      })
-      .promise();
+    await DynamoDBClient.put({
+      TableName: "product",
+      Item: {
+        id: product.id().value(),
+        name: product.name().value(),
+        price: product.price().value(),
+      },
+    }).promise();
   }
 
   async search(id: ProductId) {
-    let result = await document
-      .get({
-        TableName: "product",
-        Key: {
-          id: id.value(),
-        },
-      })
-      .promise();
+    let result = await DynamoDBClient.get({
+      TableName: "product",
+      Key: {
+        id: id.value(),
+      },
+    }).promise();
 
     if (!result.Item) {
       return undefined;
@@ -43,12 +37,10 @@ export class DynamoProductRepository implements ProductRepository {
   }
 
   async matching() {
-    let result = await document
-      .scan({
-        TableName: "product",
-        Limit: 1000,
-      })
-      .promise();
+    let result = await DynamoDBClient.scan({
+      TableName: "product",
+      Limit: 1000,
+    }).promise();
 
     return result.Items!.map(
       (item) =>

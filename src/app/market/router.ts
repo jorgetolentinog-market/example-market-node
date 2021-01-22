@@ -1,9 +1,9 @@
-import {
-  ProductCreator,
-  ProductMatcher,
-  ProductSearcher,
-} from "@market/product/application";
-import { ProductId, ProductName, ProductPrice } from "@market/product/domain";
+import { ProductCreator } from "@market/product/application/product-creator";
+import { ProductMatcher } from "@market/product/application/product-matcher";
+import { ProductSearcher } from "@market/product/application/product-seacher";
+import { ProductId } from "@market/product/domain/product-id";
+import { ProductName } from "@market/product/domain/product-name";
+import { ProductPrice } from "@market/product/domain/product-price";
 import { DynamoProductRepository } from "@market/product/infrasctructure/persistence";
 import { asyncHandler } from "@shared/infrasctructure/express";
 import express from "express";

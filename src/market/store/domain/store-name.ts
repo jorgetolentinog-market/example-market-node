@@ -1,6 +1,6 @@
 import { StringValueObject } from "@shared/domain/value-object/string";
 
-export class ProductName extends StringValueObject<"ProductName"> {
+export class StoreName extends StringValueObject<"StoreName"> {
   validate(name: string) {
     super.validate(name);
 

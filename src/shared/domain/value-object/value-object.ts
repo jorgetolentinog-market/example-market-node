@@ -13,5 +13,5 @@ export abstract class ValueObject<T, N extends string> {
     return this._value;
   }
 
-  protected validate(_: T) {}
+  validate(_: T) {}
 }

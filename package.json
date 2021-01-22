@@ -6,7 +6,7 @@
   "scripts": {
     "start": "serverless offline start --stage local",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "check": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "docs:api": "npx swagger-merger -i docs/api/definition/index.yml -o docs/api/swagger.yml",
     "serverless:webpack": "serverless webpack",
     "serverless:dynamodb": "serverless dynamodb install"
@@ -17,6 +17,7 @@
     "aws-sdk": "^2.828.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "moment": "^2.29.1",
     "serverless-http": "^2.6.0",
     "tiny-types": "^1.15.0",
     "uuid": "^8.3.2"

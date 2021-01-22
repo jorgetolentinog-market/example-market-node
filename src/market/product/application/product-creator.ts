@@ -1,10 +1,8 @@
-import {
-  Product,
-  ProductId,
-  ProductName,
-  ProductPrice,
-  ProductRepository,
-} from "@market/product/domain";
+import { Product } from "@market/product/domain/product";
+import { ProductId } from "@market/product/domain/product-id";
+import { ProductName } from "@market/product/domain/product-name";
+import { ProductPrice } from "@market/product/domain/product-price";
+import { ProductRepository } from "@market/product/domain/product-repository";
 
 export class ProductCreator {
   constructor(private repository: ProductRepository) {}
