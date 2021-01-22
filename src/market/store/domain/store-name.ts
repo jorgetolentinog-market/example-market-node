@@ -1,4 +1,4 @@
-import { StringValueObject } from "@shared/domain/value-object/string";
+import { StringValueObject } from "@/shared/domain/value-object/string";
 
 export class StoreName extends StringValueObject<"StoreName"> {
   validate(name: string) {

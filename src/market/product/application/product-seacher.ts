@@ -1,6 +1,6 @@
-import { Product } from "@market/product/domain/product";
-import { ProductId } from "@market/product/domain/product-id";
-import { ProductRepository } from "@market/product/domain/product-repository";
+import { Product } from "@/market/product/domain/product";
+import { ProductId } from "@/market/product/domain/product-id";
+import { ProductRepository } from "@/market/product/domain/product-repository";
 
 export class ProductSearcher {
   constructor(private repository: ProductRepository) {}

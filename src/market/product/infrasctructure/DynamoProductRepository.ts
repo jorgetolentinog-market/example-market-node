@@ -1,9 +1,9 @@
-import { Product } from "@market/product/domain/product";
-import { ProductId } from "@market/product/domain/product-id";
-import { ProductName } from "@market/product/domain/product-name";
-import { ProductPrice } from "@market/product/domain/product-price";
-import { ProductRepository } from "@market/product/domain/product-repository";
-import { DynamoDBClient } from "@shared/infrasctructure/dynamodb";
+import { Product } from "@/market/product/domain/product";
+import { ProductId } from "@/market/product/domain/product-id";
+import { ProductName } from "@/market/product/domain/product-name";
+import { ProductPrice } from "@/market/product/domain/product-price";
+import { ProductRepository } from "@/market/product/domain/product-repository";
+import { DynamoDBClient } from "@/shared/infrasctructure/dynamodb";
 
 export class DynamoProductRepository implements ProductRepository {
   async save(product: Product) {

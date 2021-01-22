@@ -1,3 +1,3 @@
-import { DateValueObject } from "@shared/domain/value-object/date";
+import { DateValueObject } from "@/shared/domain/value-object/date";
 
 export class StoreCreatedAt extends DateValueObject<"StoreCreatedAt"> {}

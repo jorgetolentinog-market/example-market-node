@@ -13,8 +13,7 @@
     "outDir": "lib",
     "baseUrl": "./",
     "paths": {
-      "@market/*": ["./src/market/*"],
-      "@shared/*": ["./src/shared/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["./**/*.ts"],

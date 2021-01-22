@@ -11,8 +11,7 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".js"],
     alias: {
-      "@market": path.resolve(__dirname, "src/market"),
-      "@shared": path.resolve(__dirname, "src/shared"),
+      "@": path.resolve(__dirname, "src"),
     },
   },
   output: {

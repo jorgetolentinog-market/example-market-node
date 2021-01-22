@@ -1,8 +1,8 @@
-import { Store } from "@market/store/domain/store";
-import { StoreCreatedAt } from "@market/store/domain/store-created-at";
-import { StoreId } from "@market/store/domain/store-id";
-import { StoreName } from "@market/store/domain/store-name";
-import { StoreRepository } from "@market/store/domain/store-repository";
+import { Store } from "@/market/store/domain/store";
+import { StoreCreatedAt } from "@/market/store/domain/store-created-at";
+import { StoreId } from "@/market/store/domain/store-id";
+import { StoreName } from "@/market/store/domain/store-name";
+import { StoreRepository } from "@/market/store/domain/store-repository";
 
 export class StoreCreator {
   constructor(private repository: StoreRepository) {}
