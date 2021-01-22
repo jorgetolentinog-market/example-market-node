@@ -3,7 +3,7 @@ import { StoreSearcher } from "@/market/store/application/store-searcher";
 import { StoreCreatedAt } from "@/market/store/domain/store-created-at";
 import { StoreId } from "@/market/store/domain/store-id";
 import { StoreName } from "@/market/store/domain/store-name";
-import { DynamoStoreRepository } from "@/market/store/infrastructure/DynamoStoreRepostory";
+import { DynamoStoreRepository } from "@/market/store/infrastructure/dynamo-store-repostory";
 import { asyncHandler } from "@/shared/infrasctructure/express";
 import { Router } from "express";
 import { v4 as uuidv4 } from "uuid";
