@@ -3,7 +3,7 @@ import {
   ProductMatcher,
   ProductSearcher,
 } from "@market/product/application";
-import { ProductId, ProductName } from "@market/product/domain";
+import { ProductId, ProductName, ProductPrice } from "@market/product/domain";
 import { DynamoProductRepository } from "@market/product/infrasctructure/persistence";
 import { asyncHandler } from "@shared/infrasctructure/express";
 import express from "express";
@@ -36,8 +36,12 @@ router.post(
   asyncHandler(async (req, res) => {
     let identifier = uuidv4();
     let action = new ProductCreator(productRepository);
-    await action.create(new ProductId(identifier), new ProductName("myname"));
-    res.send({
+    await action.create(
+      new ProductId(identifier),
+      new ProductName(req.body.name),
+      new ProductPrice(req.body.price)
+    );
+    res.status(201).send({
       id: identifier,
     });
   })

@@ -2,6 +2,7 @@ import {
   Product,
   ProductId,
   ProductName,
+  ProductPrice,
   ProductRepository,
 } from "@market/product/domain";
 import { client as document } from "@shared/infrasctructure/dynamodb";
@@ -14,6 +15,7 @@ export class DynamoProductRepository implements ProductRepository {
         Item: {
           id: product.id().value(),
           name: product.name().value(),
+          price: product.price().value(),
         },
       })
       .promise();
@@ -35,7 +37,8 @@ export class DynamoProductRepository implements ProductRepository {
 
     return new Product(
       new ProductId(result.Item.id),
-      new ProductName(result.Item.name)
+      new ProductName(result.Item.name),
+      new ProductPrice(result.Item.price)
     );
   }
 
@@ -48,7 +51,12 @@ export class DynamoProductRepository implements ProductRepository {
       .promise();
 
     return result.Items!.map(
-      (item) => new Product(new ProductId(item.id), new ProductName(item.name))
+      (item) =>
+        new Product(
+          new ProductId(item.id),
+          new ProductName(item.name),
+          new ProductPrice(item.price)
+        )
     );
   }
 }

@@ -1,0 +1,55 @@
+paths:
+  /store:
+    post:
+      description: Crea una tienda
+      tags:
+        - Store
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Store"
+      responses:
+        201:
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Store"
+  /store/{id}:
+    put:
+      description: Actualiza una tienda
+      tags:
+        - Store
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Store"
+      responses:
+        200:
+          description: updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Store"
+
+schemas:
+  Store:
+    type: object
+    properties:
+      _id:
+        type: string
+        readOnly: true
+      title:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+        readOnly: true

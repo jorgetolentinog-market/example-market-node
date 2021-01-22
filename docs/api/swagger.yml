@@ -1,0 +1,222 @@
+openapi: 3.0.0
+info:
+  title: Market
+  version: latest
+servers:
+  - url: 'http://localhost:3000/local'
+  - url: 'https://c1dmjwlayi.execute-api.us-east-1.amazonaws.com/dev'
+paths:
+  /market/product:
+    post:
+      description: Crea un producto
+      tags:
+        - Product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: number
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+    get:
+      description: Devuelve lista de productos
+      tags:
+        - Product
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Product'
+  '/market/product/{id}':
+    get:
+      description: Devuelve el detalle de un producto
+      tags:
+        - Product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  price:
+                    type: number
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+    put:
+      description: Actualiza un producto
+      tags:
+        - Product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+  /category:
+    post:
+      description: Crea una categoria
+      tags:
+        - Category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+    get:
+      description: Devuelve lista de categorias
+      tags:
+        - Category
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Category'
+  /store:
+    post:
+      description: Crea una tienda
+      tags:
+        - Store
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Store'
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+  '/store/{id}':
+    put:
+      description: Actualiza una tienda
+      tags:
+        - Store
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Store'
+      responses:
+        '200':
+          description: updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+          readOnly: true
+        title:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+    Category:
+      type: object
+      properties:
+        _id:
+          type: string
+          readOnly: true
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+    Store:
+      type: object
+      properties:
+        _id:
+          type: string
+          readOnly: true
+        title:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+  responses:
+    ErrorNotFound:
+      description: error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

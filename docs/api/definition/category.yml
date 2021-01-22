@@ -1,0 +1,43 @@
+paths:
+  /category:
+    post:
+      description: Crea una categoria
+      tags:
+        - Category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+      responses:
+        201:
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+    get:
+      description: Devuelve lista de categorias
+      tags:
+        - Category
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Category"
+schemas:
+  Category:
+    type: object
+    properties:
+      _id:
+        type: string
+        readOnly: true
+      description:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+        readOnly: true

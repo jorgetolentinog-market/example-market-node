@@ -1,0 +1,14 @@
+schemas:
+  Error:
+    type: object
+    properties:
+      error:
+        type: string
+
+responses:
+  ErrorNotFound:
+    description: error
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/Error"
