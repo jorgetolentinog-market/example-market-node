@@ -1,11 +1,12 @@
+import bodyParser from "body-parser";
 import express from "express";
 import serverless from "serverless-http";
-import bodyParser from "body-parser";
-import { router } from "./router";
+import { productRouter } from "./router/product";
+import { storeRouter } from "./router/store";
 
 const app = express();
 app.use(bodyParser.json());
 
-app.use("/market", router);
+app.use("/market", productRouter, storeRouter);
 
 export const handler = serverless(app);

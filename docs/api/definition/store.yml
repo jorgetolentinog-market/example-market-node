@@ -1,5 +1,5 @@
 paths:
-  /store:
+  /market/store:
     post:
       description: Crea una tienda
       tags:
@@ -8,7 +8,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Store"
+              type: object
+              properties:
+                name:
+                  type: string
       responses:
         201:
           description: created
@@ -16,7 +19,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Store"
-  /store/{id}:
+
+  /market/store/{id}:
     put:
       description: Actualiza una tienda
       tags:

@@ -4,16 +4,16 @@ import { ProductSearcher } from "@market/product/application/product-seacher";
 import { ProductId } from "@market/product/domain/product-id";
 import { ProductName } from "@market/product/domain/product-name";
 import { ProductPrice } from "@market/product/domain/product-price";
-import { DynamoProductRepository } from "@market/product/infrasctructure/persistence";
+import { DynamoProductRepository } from "@market/product/infrasctructure/DynamoProductRepository";
 import { asyncHandler } from "@shared/infrasctructure/express";
 import express from "express";
 import { v4 as uuidv4 } from "uuid";
 
 const productRepository = new DynamoProductRepository();
 
-const router = express.Router();
+const productRouter = express.Router();
 
-router.get(
+productRouter.get(
   "/product/:id",
   asyncHandler(async (req, res) => {
     let action = new ProductSearcher(productRepository);
@@ -22,7 +22,7 @@ router.get(
   })
 );
 
-router.get(
+productRouter.get(
   "/product",
   asyncHandler(async (req, res) => {
     let action = new ProductMatcher(productRepository);
@@ -31,7 +31,7 @@ router.get(
   })
 );
 
-router.post(
+productRouter.post(
   "/product",
   asyncHandler(async (req, res) => {
     let identifier = uuidv4();
@@ -47,4 +47,4 @@ router.post(
   })
 );
 
-export { router };
+export { productRouter };
