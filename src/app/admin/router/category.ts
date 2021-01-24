@@ -13,10 +13,12 @@ const repository = new DynamoCategoryRepository();
 const router = Router();
 
 router.get(
-  "/category/:id",
+  "/category/:categoryId",
   asyncHandler(async (req, res) => {
     let action = new CategoryFinder(repository);
-    let result = await action.find(new CategoryFinderRequest(req.params.id));
+    let result = await action.find(
+      new CategoryFinderRequest(req.params.categoryId)
+    );
     res.status(200).send(result.response());
   })
 );

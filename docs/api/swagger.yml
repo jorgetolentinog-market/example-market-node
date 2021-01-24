@@ -140,6 +140,35 @@ paths:
                     type: number
         '404':
           $ref: '#/components/responses/ErrorNotFound'
+  '/admin/product/{id}/category':
+    post:
+      description: Asocia la categoria a un producto
+      tags:
+        - Admin / Product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                categoryId:
+                  type: string
+      responses:
+        '201':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
 components:
   schemas:
     Error:
