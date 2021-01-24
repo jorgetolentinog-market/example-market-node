@@ -1,4 +1,4 @@
-import { DynamoDBClient } from "@/shared/infrasctructure/dynamodb";
+import { DynamoDBClient } from "@/context/shared/infrasctructure/dynamodb";
 import { Store } from "../domain/store";
 import { StoreCreatedAt } from "../domain/store-created-at";
 import { StoreId } from "../domain/store-id";

@@ -1,4 +1,4 @@
-import { NumberValueObject } from "@/shared/domain/value-object/number";
+import { NumberValueObject } from "@/context/shared/domain/value-object/number";
 
 export class ProductPrice extends NumberValueObject<"ProductPrice"> {
   validate(price: number) {

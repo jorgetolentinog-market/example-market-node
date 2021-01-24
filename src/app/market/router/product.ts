@@ -1,11 +1,11 @@
-import { ProductCreator } from "@/market/product/application/product-creator";
-import { ProductMatcher } from "@/market/product/application/product-matcher";
-import { ProductSearcher } from "@/market/product/application/product-seacher";
-import { ProductId } from "@/market/product/domain/product-id";
-import { ProductName } from "@/market/product/domain/product-name";
-import { ProductPrice } from "@/market/product/domain/product-price";
-import { DynamoProductRepository } from "@/market/product/infrasctructure/dynamo-product-repository";
-import { asyncHandler } from "@/shared/infrasctructure/express";
+import { ProductCreator } from "@/context/market/product/application/product-creator";
+import { ProductMatcher } from "@/context/market/product/application/product-matcher";
+import { ProductSearcher } from "@/context/market/product/application/product-seacher";
+import { ProductId } from "@/context/market/product/domain/product-id";
+import { ProductName } from "@/context/market/product/domain/product-name";
+import { ProductPrice } from "@/context/market/product/domain/product-price";
+import { DynamoProductRepository } from "@/context/market/product/infrasctructure/dynamo-product-repository";
+import { asyncHandler } from "@/context/shared/infrasctructure/express";
 import express from "express";
 import { v4 as uuidv4 } from "uuid";
 
