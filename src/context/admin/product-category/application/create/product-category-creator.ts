@@ -7,7 +7,6 @@ export class ProductCategoryCreator {
 
   async create(request: ProductCategoryCreatorRequest): Promise<void> {
     let productCategory = new ProductCategory(
-      request.id(),
       request.productId(),
       request.categoryId()
     );

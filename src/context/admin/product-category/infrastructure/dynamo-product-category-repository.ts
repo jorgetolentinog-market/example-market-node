@@ -2,7 +2,6 @@ import { ProductId } from "@/context/admin/product/domain/product-id";
 import { DynamoDBClient } from "@/context/shared/infrasctructure/dynamodb";
 import { CategoryId } from "../../category/domain/category-id";
 import { ProductCategory } from "../domain/product-category";
-import { ProductCategoryId } from "../domain/product-category-id";
 import { ProductCategoryRepository } from "../domain/product-category-repository";
 
 export class DynamoProductCategoryRepository
@@ -11,29 +10,35 @@ export class DynamoProductCategoryRepository
     await DynamoDBClient.put({
       TableName: "product-category",
       Item: {
-        id: productCategory.id().value(),
-        product: productCategory.productId().value(),
-        category: productCategory.categoryId().value(),
+        productId: productCategory.productId().value(),
+        categoryId: productCategory.categoryId().value(),
       },
     }).promise();
   }
 
-  async find(id: ProductCategoryId) {
-    let result = await DynamoDBClient.get({
+  async search(productId: ProductId) {
+    let result = await DynamoDBClient.query({
       TableName: "product-category",
-      Key: {
-        id: id.value(),
+      KeyConditionExpression: "#productId = :productId",
+      ExpressionAttributeNames: {
+        "#productId": "productId",
       },
+      ExpressionAttributeValues: {
+        ":productId": productId.value(),
+      },
+      Limit: 1000,
     }).promise();
 
-    if (!result.Item) {
-      return undefined;
-    }
-
-    return new ProductCategory(
-      new ProductCategoryId(result.Item.id),
-      new ProductId(result.Item.name),
-      new CategoryId(result.Item.price)
+    return result.Items!.map(
+      (item) =>
+        new ProductCategory(
+          new ProductId(item.productId),
+          new CategoryId(item.categoryId)
+        )
     );
+  }
+
+  async delete(productCategory: ProductCategory): Promise<void> {
+    throw new Error("Method not implemented.");
   }
 }

@@ -1,5 +1,7 @@
 import { ProductCategoryCreator } from "@/context/admin/product-category/application/create/product-category-creator";
 import { ProductCategoryCreatorRequest } from "@/context/admin/product-category/application/create/product-category-creator-request";
+import { ProductCategorySearcher } from "@/context/admin/product-category/application/search/product-category-searcher";
+import { ProductCategorySearcherRequest } from "@/context/admin/product-category/application/search/product-category-searcher-request";
 import { DynamoProductCategoryRepository } from "@/context/admin/product-category/infrastructure/dynamo-product-category-repository";
 import { ProductCreator } from "@/context/admin/product/application/create/product-creator";
 import { ProductCreatorRequest } from "@/context/admin/product/application/create/product-creator-request";
@@ -49,21 +51,28 @@ router.post(
   })
 );
 
+router.get(
+  "/product/:productId/category",
+  asyncHandler(async (req, res) => {
+    let action = new ProductCategorySearcher(productCategoryRepository);
+    let result = await action.search(
+      new ProductCategorySearcherRequest(req.params.productId)
+    );
+    res.status(200).send(result.response());
+  })
+);
+
 router.post(
   "/product/:productId/category",
   asyncHandler(async (req, res) => {
-    let id = uuidv4();
     let action = new ProductCategoryCreator(productCategoryRepository);
     await action.create(
       new ProductCategoryCreatorRequest(
-        id,
         req.params.productId,
         req.body.categoryId
       )
     );
-    res.status(201).send({
-      id,
-    });
+    res.status(201).send({});
   })
 );
 

@@ -86,11 +86,15 @@ resources:
       Properties:
         TableName: product-category
         AttributeDefinitions:
-          - AttributeName: id
+          - AttributeName: productId
+            AttributeType: S
+          - AttributeName: categoryId
             AttributeType: S
         KeySchema:
-          - AttributeName: id
+          - AttributeName: productId
             KeyType: HASH
+          - AttributeName: categoryId
+            KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
 
     StoreTable:
