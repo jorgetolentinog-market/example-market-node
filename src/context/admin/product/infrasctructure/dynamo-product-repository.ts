@@ -1,8 +1,8 @@
-import { Product } from "@/context/market/product/domain/product";
-import { ProductId } from "@/context/market/product/domain/product-id";
-import { ProductName } from "@/context/market/product/domain/product-name";
-import { ProductPrice } from "@/context/market/product/domain/product-price";
-import { ProductRepository } from "@/context/market/product/domain/product-repository";
+import { Product } from "@/context/admin/product/domain/product";
+import { ProductId } from "@/context/admin/product/domain/product-id";
+import { ProductName } from "@/context/admin/product/domain/product-name";
+import { ProductPrice } from "@/context/admin/product/domain/product-price";
+import { ProductRepository } from "@/context/admin/product/domain/product-repository";
 import { DynamoDBClient } from "@/context/shared/infrasctructure/dynamodb";
 
 export class DynamoProductRepository implements ProductRepository {

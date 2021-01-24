@@ -1,10 +1,9 @@
-import { ProductCreator } from "@/context/market/product/application/product-creator";
-import { ProductMatcher } from "@/context/market/product/application/product-matcher";
-import { ProductSearcher } from "@/context/market/product/application/product-seacher";
-import { ProductId } from "@/context/market/product/domain/product-id";
-import { ProductName } from "@/context/market/product/domain/product-name";
-import { ProductPrice } from "@/context/market/product/domain/product-price";
-import { DynamoProductRepository } from "@/context/market/product/infrasctructure/dynamo-product-repository";
+import { ProductCreator } from "@/context/admin/product/application/create/product-creator";
+import { ProductCreatorRequest } from "@/context/admin/product/application/create/product-creator-request";
+import { ProductMatcher } from "@/context/admin/product/application/match/product-matcher";
+import { ProductSearcher } from "@/context/admin/product/application/search/product-seacher";
+import { ProductSearcherRequest } from "@/context/admin/product/application/search/product-searcher-request";
+import { DynamoProductRepository } from "@/context/admin/product/infrasctructure/dynamo-product-repository";
 import { asyncHandler } from "@/context/shared/infrasctructure/express";
 import express from "express";
 import { v4 as uuidv4 } from "uuid";
@@ -17,7 +16,7 @@ productRouter.get(
   "/product/:id",
   asyncHandler(async (req, res) => {
     let action = new ProductSearcher(productRepository);
-    let result = await action.search(new ProductId(req.params.id));
+    let result = await action.search(new ProductSearcherRequest(req.params.id));
     res.send(result);
   })
 );
@@ -34,15 +33,13 @@ productRouter.get(
 productRouter.post(
   "/product",
   asyncHandler(async (req, res) => {
-    let identifier = uuidv4();
+    let id = uuidv4();
     let action = new ProductCreator(productRepository);
     await action.create(
-      new ProductId(identifier),
-      new ProductName(req.body.name),
-      new ProductPrice(req.body.price)
+      new ProductCreatorRequest(id, req.body.name, req.body.price)
     );
     res.status(201).send({
-      id: identifier,
+      id,
     });
   })
 );

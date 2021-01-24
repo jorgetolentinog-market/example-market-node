@@ -1,9 +1,9 @@
-import { StoreCreator } from "@/context/market/store/application/store-creator";
-import { StoreSearcher } from "@/context/market/store/application/store-searcher";
-import { StoreCreatedAt } from "@/context/market/store/domain/store-created-at";
-import { StoreId } from "@/context/market/store/domain/store-id";
-import { StoreName } from "@/context/market/store/domain/store-name";
-import { DynamoStoreRepository } from "@/context/market/store/infrastructure/dynamo-store-repostory";
+import { StoreCreator } from "@/context/admin/store/application/store-creator";
+import { StoreSearcher } from "@/context/admin/store/application/store-searcher";
+import { StoreCreatedAt } from "@/context/admin/store/domain/store-created-at";
+import { StoreId } from "@/context/admin/store/domain/store-id";
+import { StoreName } from "@/context/admin/store/domain/store-name";
+import { DynamoStoreRepository } from "@/context/admin/store/infrastructure/dynamo-store-repostory";
 import { asyncHandler } from "@/context/shared/infrasctructure/express";
 import { Router } from "express";
 import { v4 as uuidv4 } from "uuid";
