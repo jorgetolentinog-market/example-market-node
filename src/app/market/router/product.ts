@@ -5,12 +5,12 @@ import { ProductSearcher } from "@/context/admin/product/application/search/prod
 import { ProductSearcherRequest } from "@/context/admin/product/application/search/product-searcher-request";
 import { DynamoProductRepository } from "@/context/admin/product/infrasctructure/dynamo-product-repository";
 import { asyncHandler } from "@/context/shared/infrasctructure/express";
-import express from "express";
+import { Router } from "express";
 import { v4 as uuidv4 } from "uuid";
 
 const productRepository = new DynamoProductRepository();
 
-const productRouter = express.Router();
+const productRouter = Router();
 
 productRouter.get(
   "/product/:id",

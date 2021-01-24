@@ -40,15 +40,15 @@ custom:
       - local
 
 functions:
-  product:
-    handler: src/app/market/app.handler
+  admin:
+    handler: src/app/admin/app.handler
     events:
       - http:
-          path: /market
+          path: /admin
           method: ANY
           cors: true
       - http:
-          path: /market/{proxy+}
+          path: /admin/{proxy+}
           method: ANY
           cors: true
 
@@ -65,9 +65,20 @@ resources:
         KeySchema:
           - AttributeName: id
             KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+        BillingMode: PAY_PER_REQUEST
+
+    CategoryTable:
+      Type: "AWS::DynamoDB::Table"
+      DeletionPolicy: Retain
+      Properties:
+        TableName: category
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
 
     StoreTable:
       Type: "AWS::DynamoDB::Table"
@@ -80,6 +91,4 @@ resources:
         KeySchema:
           - AttributeName: id
             KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+        BillingMode: PAY_PER_REQUEST

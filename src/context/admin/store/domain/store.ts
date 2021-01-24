@@ -20,12 +20,4 @@ export class Store {
   createdAt() {
     return this._createdAt;
   }
-
-  toJSON() {
-    return {
-      id: this.id(),
-      name: this.name(),
-      createdAt: this.createdAt(),
-    };
-  }
 }

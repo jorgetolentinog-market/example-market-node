@@ -6,14 +6,13 @@ servers:
   - url: "http://localhost:3000/local"
   - url: "https://c1dmjwlayi.execute-api.us-east-1.amazonaws.com/dev"
 paths:
-  $ref#product: ./product.yml#/paths
-  $ref#category: ./category.yml#/paths
-  $ref#store: ./store.yml#/paths
+  # $ref#product: ./product.yml#/paths
+  $ref#admin#category: ./admin/category.yml#/paths
+  # $ref#store: ./store.yml#/paths
 components:
   schemas:
-    $ref#product: ./product.yml#/schemas
-    $ref#category: ./category.yml#/schemas
-    $ref#store: ./store.yml#/schemas
+    # $ref#product: ./product.yml#/schemas
+    # $ref#store: ./store.yml#/schemas
     $ref#base: ./base.yml#/schemas
   responses:
     $ref#base: ./base.yml#/responses

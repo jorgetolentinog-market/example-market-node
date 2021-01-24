@@ -9,9 +9,5 @@ export abstract class ValueObject<T, N extends string> {
     return this._value;
   }
 
-  toJSON(): T {
-    return this._value;
-  }
-
   validate(_: T) {}
 }

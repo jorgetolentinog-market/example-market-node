@@ -20,12 +20,4 @@ export class Product {
   price() {
     return this._price;
   }
-
-  toJSON() {
-    return {
-      id: this.id(),
-      name: this.name(),
-      price: this.price(),
-    };
-  }
 }
