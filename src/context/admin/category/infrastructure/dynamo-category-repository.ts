@@ -15,7 +15,7 @@ export class DynamoCategoryRepository implements CategoryRepository {
     }).promise();
   }
 
-  async search(id: CategoryId): Promise<Category | undefined> {
+  async find(id: CategoryId): Promise<Category | undefined> {
     let result = await DynamoDBClient.get({
       TableName: "category",
       Key: {
@@ -30,6 +30,18 @@ export class DynamoCategoryRepository implements CategoryRepository {
     return new Category(
       new CategoryId(result.Item.id),
       new CategoryName(result.Item.name)
+    );
+  }
+
+  async search(): Promise<Category[]> {
+    let result = await DynamoDBClient.scan({
+      TableName: "category",
+      Limit: 1000,
+    }).promise();
+
+    return result.Items!.map(
+      (item) =>
+        new Category(new CategoryId(item.id), new CategoryName(item.name))
     );
   }
 }

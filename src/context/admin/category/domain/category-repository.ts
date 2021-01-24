@@ -3,5 +3,6 @@ import { CategoryId } from "./category-id";
 
 export interface CategoryRepository {
   save(category: Category): Promise<void>;
-  search(id: CategoryId): Promise<Category | undefined>;
+  find(id: CategoryId): Promise<Category | undefined>;
+  search(): Promise<Category[]>;
 }

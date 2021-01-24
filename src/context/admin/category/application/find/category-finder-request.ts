@@ -1,6 +1,6 @@
 import { CategoryId } from "../../domain/category-id";
 
-export class CategorySearcherRequest {
+export class CategoryFinderRequest {
   private readonly _id: CategoryId;
 
   constructor(id: string) {
