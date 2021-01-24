@@ -8,6 +8,7 @@ servers:
 paths:
   # $ref#product: ./product.yml#/paths
   $ref#admin#category: ./admin/category.yml#/paths
+  $ref#admin#product: ./admin/product.yml#/paths
   # $ref#store: ./store.yml#/paths
 components:
   schemas:

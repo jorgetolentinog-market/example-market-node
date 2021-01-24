@@ -3,6 +3,6 @@ import { ProductId } from "./product-id";
 
 export interface ProductRepository {
   save(product: Product): Promise<void>;
-  search(id: ProductId): Promise<Product | undefined>;
-  matching(): Promise<Product[]>;
+  find(id: ProductId): Promise<Product | undefined>;
+  search(): Promise<Product[]>;
 }

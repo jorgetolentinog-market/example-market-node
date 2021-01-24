@@ -1,6 +1,6 @@
 import { ProductId } from "@/context/admin/product/domain/product-id";
 
-export class ProductSearcherRequest {
+export class ProductFinderRequest {
   private _id: ProductId;
 
   constructor(id: string) {

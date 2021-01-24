@@ -1,9 +1,9 @@
 paths:
-  /admin/category:
+  /admin/product:
     post:
-      description: Crea una categoria
+      description: Crea un producto
       tags:
-        - Admin / Category
+        - Admin / Product
       requestBody:
         content:
           application/json:
@@ -12,6 +12,8 @@ paths:
               properties:
                 name:
                   type: string
+                price:
+                  type: number
       responses:
         201:
           description: created
@@ -24,9 +26,9 @@ paths:
                     type: string
 
     get:
-      description: Lista de categorias
+      description: Lista de productos
       tags:
-        - Admin / Category
+        - Admin / Product
       responses:
         200:
           description: ok
@@ -39,12 +41,14 @@ paths:
                     type: string
                   name:
                     type: string
+                  price:
+                    type: number
 
-  /admin/category/{id}:
+  /admin/product/{id}:
     get:
-      description: Detalle de categoria
+      description: Detalle de producto
       tags:
-        - Admin / Category
+        - Admin / Product
       parameters:
         - name: id
           in: path
@@ -63,5 +67,7 @@ paths:
                     type: string
                   name:
                     type: string
+                  price:
+                    type: number
         404:
           $ref: "#/components/responses/ErrorNotFound"

@@ -17,7 +17,7 @@ export class DynamoProductRepository implements ProductRepository {
     }).promise();
   }
 
-  async search(id: ProductId) {
+  async find(id: ProductId) {
     let result = await DynamoDBClient.get({
       TableName: "product",
       Key: {
@@ -36,7 +36,7 @@ export class DynamoProductRepository implements ProductRepository {
     );
   }
 
-  async matching() {
+  async search() {
     let result = await DynamoDBClient.scan({
       TableName: "product",
       Limit: 1000,

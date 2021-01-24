@@ -29,6 +29,22 @@ paths:
                 properties:
                   id:
                     type: string
+    get:
+      description: Lista de categorias
+      tags:
+        - Admin / Category
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
   '/admin/category/{id}':
     get:
       description: Detalle de categoria
@@ -52,6 +68,76 @@ paths:
                     type: string
                   name:
                     type: string
+        '404':
+          $ref: '#/components/responses/ErrorNotFound'
+  /admin/product:
+    post:
+      description: Crea un producto
+      tags:
+        - Admin / Product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: number
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+    get:
+      description: Lista de productos
+      tags:
+        - Admin / Product
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  price:
+                    type: number
+  '/admin/product/{id}':
+    get:
+      description: Detalle de producto
+      tags:
+        - Admin / Product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  price:
+                    type: number
         '404':
           $ref: '#/components/responses/ErrorNotFound'
 components:
