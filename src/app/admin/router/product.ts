@@ -1,5 +1,7 @@
 import { ProductCategoryCreator } from "@/context/admin/product-category/application/create/product-category-creator";
 import { ProductCategoryCreatorRequest } from "@/context/admin/product-category/application/create/product-category-creator-request";
+import { ProductCategoryDeleter } from "@/context/admin/product-category/application/delete/product-category-deleter";
+import { ProductCategoryDeleterRequest } from "@/context/admin/product-category/application/delete/product-category-deleter-request";
 import { ProductCategorySearcher } from "@/context/admin/product-category/application/search/product-category-searcher";
 import { ProductCategorySearcherRequest } from "@/context/admin/product-category/application/search/product-category-searcher-request";
 import { DynamoProductCategoryRepository } from "@/context/admin/product-category/infrastructure/dynamo-product-category-repository";
@@ -70,6 +72,20 @@ router.post(
       new ProductCategoryCreatorRequest(
         req.params.productId,
         req.body.categoryId
+      )
+    );
+    res.status(201).send({});
+  })
+);
+
+router.delete(
+  "/product/:productId/category/:categoryId",
+  asyncHandler(async (req, res) => {
+    let action = new ProductCategoryDeleter(productCategoryRepository);
+    await action.delete(
+      new ProductCategoryDeleterRequest(
+        req.params.productId,
+        req.params.categoryId
       )
     );
     res.status(201).send({});

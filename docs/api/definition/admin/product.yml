@@ -101,3 +101,23 @@ paths:
                 properties:
                   id:
                     type: string
+
+  /admin/product/{id}/category/{categoryId}:
+    delete:
+      description: Elimina asociación de categoria con producto
+      tags:
+        - Admin / Product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: categoryId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        201:
+          description: ok

@@ -39,6 +39,12 @@ export class DynamoProductCategoryRepository
   }
 
   async delete(productCategory: ProductCategory): Promise<void> {
-    throw new Error("Method not implemented.");
+    await DynamoDBClient.delete({
+      TableName: "product-category",
+      Key: {
+        productId: productCategory.productId().value(),
+        categoryId: productCategory.categoryId().value(),
+      },
+    }).promise();
   }
 }
