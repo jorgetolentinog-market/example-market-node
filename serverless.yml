@@ -96,16 +96,3 @@ resources:
           - AttributeName: categoryId
             KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
-
-    StoreTable:
-      Type: "AWS::DynamoDB::Table"
-      DeletionPolicy: Retain
-      Properties:
-        TableName: store
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-        BillingMode: PAY_PER_REQUEST

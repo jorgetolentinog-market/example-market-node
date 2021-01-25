@@ -169,6 +169,28 @@ paths:
                 properties:
                   id:
                     type: string
+    get:
+      description: Lista de categorias asociadas
+      tags:
+        - Admin / Product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
   '/admin/product/{id}/category/{categoryId}':
     delete:
       description: Elimina asociación de categoria con producto
