@@ -1,10 +1,5 @@
-import { ProductCategoryCreator } from "@/context/admin/product-category/application/create/product-category-creator";
-import { ProductCategoryCreatorRequest } from "@/context/admin/product-category/application/create/product-category-creator-request";
-import { ProductCategoryDeleter } from "@/context/admin/product-category/application/delete/product-category-deleter";
-import { ProductCategoryDeleterRequest } from "@/context/admin/product-category/application/delete/product-category-deleter-request";
-import { ProductCategorySearcher } from "@/context/admin/product-category/application/search/product-category-searcher";
-import { ProductCategorySearcherRequest } from "@/context/admin/product-category/application/search/product-category-searcher-request";
-import { DynamoProductCategoryRepository } from "@/context/admin/product-category/infrastructure/dynamo-product-category-repository";
+import { ProductCategoryRemover } from "@/context/admin/product/application/category-remove/category-remover";
+import { ProductCategoryRemoverRequest } from "@/context/admin/product/application/category-remove/category-remover-requet";
 import { ProductCreator } from "@/context/admin/product/application/create/product-creator";
 import { ProductCreatorRequest } from "@/context/admin/product/application/create/product-creator-request";
 import { ProductFinder } from "@/context/admin/product/application/find/product-finder";
@@ -16,7 +11,6 @@ import { Router } from "express";
 import { v4 as uuidv4 } from "uuid";
 
 const productRepository = new DynamoProductRepository();
-const productCategoryRepository = new DynamoProductCategoryRepository();
 const router = Router();
 
 router.get(
@@ -58,37 +52,12 @@ router.post(
   })
 );
 
-router.get(
-  "/product/:productId/category",
-  asyncHandler(async (req, res) => {
-    let action = new ProductCategorySearcher(productCategoryRepository);
-    let result = await action.search(
-      new ProductCategorySearcherRequest(req.params.productId)
-    );
-    res.status(200).send(result.response());
-  })
-);
-
-router.post(
-  "/product/:productId/category",
-  asyncHandler(async (req, res) => {
-    let action = new ProductCategoryCreator(productCategoryRepository);
-    await action.create(
-      new ProductCategoryCreatorRequest(
-        req.params.productId,
-        req.body.categoryId
-      )
-    );
-    res.status(201).send({});
-  })
-);
-
 router.delete(
   "/product/:productId/category/:categoryId",
   asyncHandler(async (req, res) => {
-    let action = new ProductCategoryDeleter(productCategoryRepository);
-    await action.delete(
-      new ProductCategoryDeleterRequest(
+    let action = new ProductCategoryRemover(productRepository);
+    await action.remove(
+      new ProductCategoryRemoverRequest(
         req.params.productId,
         req.params.categoryId
       )

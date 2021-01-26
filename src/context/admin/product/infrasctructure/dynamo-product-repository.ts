@@ -3,6 +3,8 @@ import { ProductName } from "@/context/admin/product/domain/product-name";
 import { ProductPrice } from "@/context/admin/product/domain/product-price";
 import { ProductRepository } from "@/context/admin/product/domain/product-repository";
 import { DynamoDBClient } from "@/context/shared/infrasctructure/dynamodb";
+import { DocumentClient } from "aws-sdk/clients/dynamodb";
+import { CategoryId } from "../../category/domain/category-id";
 import { Product } from "../domain/product";
 import { ProductCategories } from "../domain/product-categories";
 
@@ -54,5 +56,35 @@ export class DynamoProductRepository implements ProductRepository {
           new ProductCategories(item.categories)
         )
     );
+  }
+
+  async removeCategory(
+    productId: ProductId,
+    categoryId: CategoryId
+  ): Promise<void> {
+    let product = await this.find(productId);
+    if (!product) {
+      throw new Error("Producto no encontrado");
+    }
+    let categories = product.categories().primitive();
+
+    const index = categories.indexOf(categoryId.primitive());
+    if (index > -1) {
+      categories.splice(index, 1);
+    }
+
+    await DynamoDBClient.update({
+      TableName: "product",
+      Key: {
+        id: product.id().primitive(),
+      },
+      UpdateExpression: "SET #categories = :categories",
+      ExpressionAttributeNames: {
+        "#categories": "categories",
+      },
+      ExpressionAttributeValues: {
+        ":categories": categories,
+      },
+    }).promise();
   }
 }
