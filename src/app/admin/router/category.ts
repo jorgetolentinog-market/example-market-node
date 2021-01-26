@@ -4,7 +4,7 @@ import { CategoryFinder } from "@/context/admin/category/application/find/catego
 import { CategoryFinderRequest } from "@/context/admin/category/application/find/category-finder-request";
 import { CategorySearcher } from "@/context/admin/category/application/search/category-searcher";
 import { DynamoCategoryRepository } from "@/context/admin/category/infrastructure/dynamo-category-repository";
-import { asyncHandler } from "@/context/shared/infrasctructure/express";
+import { asyncHandler } from "@/shared/infrasctructure/express";
 import { Router } from "express";
 import { v4 as uuidv4 } from "uuid";
 

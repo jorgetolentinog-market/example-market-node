@@ -1,4 +1,4 @@
-import { DynamoDBClient } from "@/context/shared/infrasctructure/dynamodb";
+import { DynamoDBClient } from "@/shared/infrasctructure/dynamodb";
 import { Category } from "../domain/category";
 import { CategoryId } from "../domain/category-id";
 import { CategoryName } from "../domain/category-name";

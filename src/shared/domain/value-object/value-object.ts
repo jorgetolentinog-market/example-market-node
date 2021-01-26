@@ -1,5 +1,5 @@
 export abstract class ValueObject<T, N extends string> {
-  protected __nominal: N;
+  //protected __nominal: N;
 
   constructor(private readonly _value: T) {
     this.validate(_value);

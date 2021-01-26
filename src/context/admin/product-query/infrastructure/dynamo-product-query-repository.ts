@@ -1,7 +1,7 @@
 import { ProductId } from "@/context/admin/product/domain/product-id";
 import { ProductName } from "@/context/admin/product/domain/product-name";
 import { ProductPrice } from "@/context/admin/product/domain/product-price";
-import { DynamoDBClient } from "@/context/shared/infrasctructure/dynamodb";
+import { DynamoDBClient } from "@/shared/infrasctructure/dynamodb";
 import { Category } from "../../category/domain/category";
 import { CategoryId } from "../../category/domain/category-id";
 import { CategoryName } from "../../category/domain/category-name";

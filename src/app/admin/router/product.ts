@@ -6,7 +6,7 @@ import { ProductFinder } from "@/context/admin/product/application/find/product-
 import { ProductFinderRequest } from "@/context/admin/product/application/find/product-finder-request";
 import { ProductSearcher } from "@/context/admin/product/application/search/product-searcher";
 import { DynamoProductRepository } from "@/context/admin/product/infrasctructure/dynamo-product-repository";
-import { asyncHandler } from "@/context/shared/infrasctructure/express";
+import { asyncHandler } from "@/shared/infrasctructure/express";
 import { Router } from "express";
 import { v4 as uuidv4 } from "uuid";
 

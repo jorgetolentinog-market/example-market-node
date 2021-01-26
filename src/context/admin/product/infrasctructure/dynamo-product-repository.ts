@@ -2,7 +2,7 @@ import { ProductId } from "@/context/admin/product/domain/product-id";
 import { ProductName } from "@/context/admin/product/domain/product-name";
 import { ProductPrice } from "@/context/admin/product/domain/product-price";
 import { ProductRepository } from "@/context/admin/product/domain/product-repository";
-import { DynamoDBClient } from "@/context/shared/infrasctructure/dynamodb";
+import { DynamoDBClient } from "@/shared/infrasctructure/dynamodb";
 import { CategoryId } from "../../category/domain/category-id";
 import { Product } from "../domain/product";
 import { ProductCategoriesId } from "../domain/product-categories-id";

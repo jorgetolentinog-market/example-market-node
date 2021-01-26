@@ -1,5 +1,5 @@
 import { ProductId } from "@/context/admin/product/domain/product-id";
-import { DynamoDBClient } from "@/context/shared/infrasctructure/dynamodb";
+import { DynamoDBClient } from "@/shared/infrasctructure/dynamodb";
 import { CategoryId } from "../../category/domain/category-id";
 import { ProductCategory } from "../domain/product-category";
 import { ProductCategoryRepository } from "../domain/product-category-repository";
