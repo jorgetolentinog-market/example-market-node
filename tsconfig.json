@@ -8,6 +8,7 @@
     "noImplicitReturns": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
+    "strict": true,
     "sourceMap": true,
     "target": "es2017",
     "outDir": "lib",

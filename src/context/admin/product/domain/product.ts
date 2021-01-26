@@ -1,4 +1,4 @@
-import { ProductCategories } from "./product-categories";
+import { ProductCategoriesId } from "./product-categories-id";
 import { ProductId } from "./product-id";
 import { ProductName } from "./product-name";
 import { ProductPrice } from "./product-price";
@@ -8,7 +8,7 @@ export class Product {
     private readonly _id: ProductId,
     private readonly _name: ProductName,
     private readonly _price: ProductPrice,
-    private readonly _categories: ProductCategories
+    private readonly _categories: ProductCategoriesId
   ) {}
 
   id() {

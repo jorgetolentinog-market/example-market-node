@@ -1,6 +1,6 @@
 import { CategoryId } from "@/context/admin/category/domain/category-id";
 
-export class ProductCategories {
+export class ProductCategoriesId {
   private _categories: CategoryId[] = [];
 
   constructor(categories: string[]) {

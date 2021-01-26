@@ -3,10 +3,9 @@ import { ProductName } from "@/context/admin/product/domain/product-name";
 import { ProductPrice } from "@/context/admin/product/domain/product-price";
 import { ProductRepository } from "@/context/admin/product/domain/product-repository";
 import { DynamoDBClient } from "@/context/shared/infrasctructure/dynamodb";
-import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import { CategoryId } from "../../category/domain/category-id";
 import { Product } from "../domain/product";
-import { ProductCategories } from "../domain/product-categories";
+import { ProductCategoriesId } from "../domain/product-categories-id";
 
 export class DynamoProductRepository implements ProductRepository {
   async save(product: Product) {
@@ -37,7 +36,7 @@ export class DynamoProductRepository implements ProductRepository {
       new ProductId(result.Item.id),
       new ProductName(result.Item.name),
       new ProductPrice(result.Item.price),
-      new ProductCategories(result.Item.categories)
+      new ProductCategoriesId(result.Item.categories)
     );
   }
 
@@ -53,7 +52,7 @@ export class DynamoProductRepository implements ProductRepository {
           new ProductId(item.id),
           new ProductName(item.name),
           new ProductPrice(item.price),
-          new ProductCategories(item.categories)
+          new ProductCategoriesId(item.categories)
         )
     );
   }
