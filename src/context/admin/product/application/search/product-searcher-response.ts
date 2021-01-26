@@ -1,7 +1,7 @@
-import { Product } from "../../domain/product";
+import { ProductBase } from "../../domain/product-base";
 
 export class ProductSearcherResponse {
-  constructor(private readonly input: Product[]) {}
+  constructor(private readonly input: ProductBase[]) {}
 
   response() {
     return this.input.map((c) => ({

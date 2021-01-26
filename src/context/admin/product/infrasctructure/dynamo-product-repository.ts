@@ -1,9 +1,10 @@
-import { Product } from "@/context/admin/product/domain/product";
 import { ProductId } from "@/context/admin/product/domain/product-id";
 import { ProductName } from "@/context/admin/product/domain/product-name";
 import { ProductPrice } from "@/context/admin/product/domain/product-price";
 import { ProductRepository } from "@/context/admin/product/domain/product-repository";
 import { DynamoDBClient } from "@/context/shared/infrasctructure/dynamodb";
+import { Product } from "../domain/product";
+import { ProductQuery } from "../domain/product-query";
 
 export class DynamoProductRepository implements ProductRepository {
   async save(product: Product) {
@@ -13,6 +14,7 @@ export class DynamoProductRepository implements ProductRepository {
         id: product.id().value(),
         name: product.name().value(),
         price: product.price().value(),
+        categories: product.categories().primitive(),
       },
     }).promise();
   }
@@ -29,10 +31,11 @@ export class DynamoProductRepository implements ProductRepository {
       return undefined;
     }
 
-    return new Product(
+    return new ProductQuery(
       new ProductId(result.Item.id),
       new ProductName(result.Item.name),
-      new ProductPrice(result.Item.price)
+      new ProductPrice(result.Item.price),
+      []
     );
   }
 
@@ -44,10 +47,11 @@ export class DynamoProductRepository implements ProductRepository {
 
     return result.Items!.map(
       (item) =>
-        new Product(
+        new ProductQuery(
           new ProductId(item.id),
           new ProductName(item.name),
-          new ProductPrice(item.price)
+          new ProductPrice(item.price),
+          []
         )
     );
   }

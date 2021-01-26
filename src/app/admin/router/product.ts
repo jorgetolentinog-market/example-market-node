@@ -45,7 +45,12 @@ router.post(
     let id = uuidv4();
     let action = new ProductCreator(productRepository);
     await action.create(
-      new ProductCreatorRequest(id, req.body.name, req.body.price)
+      new ProductCreatorRequest(
+        id,
+        req.body.name,
+        req.body.price,
+        req.body.categories
+      )
     );
     res.status(201).send({
       id,

@@ -6,7 +6,12 @@ export class ProductCreator {
   constructor(private repository: ProductRepository) {}
 
   async create(request: ProductCreatorRequest): Promise<void> {
-    let product = new Product(request.id(), request.name(), request.price());
+    let product = new Product(
+      request.id(),
+      request.name(),
+      request.price(),
+      request.categories()
+    );
     await this.repository.save(product);
   }
 }
