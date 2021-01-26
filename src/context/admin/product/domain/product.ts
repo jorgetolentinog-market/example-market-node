@@ -1,17 +1,26 @@
-import { ProductBase } from "./product-base";
 import { ProductCategories } from "./product-categories";
 import { ProductId } from "./product-id";
 import { ProductName } from "./product-name";
 import { ProductPrice } from "./product-price";
 
-export class Product extends ProductBase {
+export class Product {
   constructor(
-    id: ProductId,
-    name: ProductName,
-    price: ProductPrice,
+    private readonly _id: ProductId,
+    private readonly _name: ProductName,
+    private readonly _price: ProductPrice,
     private readonly _categories: ProductCategories
-  ) {
-    super(id, name, price);
+  ) {}
+
+  id() {
+    return this._id;
+  }
+
+  name() {
+    return this._name;
+  }
+
+  price() {
+    return this._price;
   }
 
   categories() {

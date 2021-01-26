@@ -9,5 +9,9 @@ export abstract class ValueObject<T, N extends string> {
     return this._value;
   }
 
+  primitive(): T {
+    return this._value;
+  }
+
   validate(_: T) {}
 }
