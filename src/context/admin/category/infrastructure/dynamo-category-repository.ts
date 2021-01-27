@@ -1,7 +1,6 @@
+import { Identifier, StringValue } from "@/shared/domain/value-object";
 import { DynamoDBClient } from "@/shared/infrasctructure/dynamodb";
 import { Category } from "../domain/category";
-import { CategoryId } from "../domain/category-id";
-import { CategoryName } from "../domain/category-name";
 import { CategoryRepository } from "../domain/category-repository";
 
 export class DynamoCategoryRepository implements CategoryRepository {
@@ -9,17 +8,17 @@ export class DynamoCategoryRepository implements CategoryRepository {
     await DynamoDBClient.put({
       TableName: "category",
       Item: {
-        id: category.id().value(),
-        name: category.name().value(),
+        id: category.id.value,
+        name: category.name.value,
       },
     }).promise();
   }
 
-  async find(id: CategoryId): Promise<Category | undefined> {
+  async find(id: Identifier): Promise<Category | undefined> {
     let result = await DynamoDBClient.get({
       TableName: "category",
       Key: {
-        id: id.value(),
+        id: id.value,
       },
     }).promise();
 
@@ -28,8 +27,8 @@ export class DynamoCategoryRepository implements CategoryRepository {
     }
 
     return new Category(
-      new CategoryId(result.Item.id),
-      new CategoryName(result.Item.name)
+      new Identifier(result.Item.id),
+      new StringValue(result.Item.name)
     );
   }
 
@@ -41,7 +40,7 @@ export class DynamoCategoryRepository implements CategoryRepository {
 
     return result.Items!.map(
       (item) =>
-        new Category(new CategoryId(item.id), new CategoryName(item.name))
+        new Category(new Identifier(item.id), new StringValue(item.name))
     );
   }
 }

@@ -1,14 +1,16 @@
 import moment from "moment";
-import { StringValueObject } from "./string";
+import { StringValue } from "./string";
 
-export abstract class DateValueObject<
-  N extends string
-> extends StringValueObject<N> {
-  validate(value: string) {
-    super.validate(value);
-    var m = moment(value);
+export abstract class DateValue extends StringValue {
+  cast() {
+    var m = moment(this.rawValue);
     if (!m.isValid()) {
       throw new Error("Fecha inválida");
     }
+    return this.rawValue;
+  }
+
+  primitive() {
+    return this.rawValue;
   }
 }

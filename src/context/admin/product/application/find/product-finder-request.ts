@@ -1,13 +1,9 @@
-import { ProductId } from "@/context/admin/product/domain/product-id";
+import { Identifier } from "@/shared/domain/value-object";
 
 export class ProductFinderRequest {
-  private _id: ProductId;
+  public readonly id: Identifier;
 
   constructor(id: string) {
-    this._id = new ProductId(id);
-  }
-
-  id() {
-    return this._id;
+    this.id = new Identifier(id);
   }
 }

@@ -1,10 +1,9 @@
-import { CategoryId } from "../../category/domain/category-id";
+import { Identifier } from "@/shared/domain/value-object";
 import { Product } from "./product";
-import { ProductId } from "./product-id";
 
 export interface ProductRepository {
   save(product: Product): Promise<void>;
-  find(id: ProductId): Promise<Product | undefined>;
+  find(id: Identifier): Promise<Product | undefined>;
   search(): Promise<Product[]>;
-  removeCategory(productId: ProductId, categoryId: CategoryId): Promise<void>;
+  removeCategory(productId: Identifier, categoryId: Identifier): Promise<void>;
 }

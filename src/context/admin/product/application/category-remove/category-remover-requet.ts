@@ -1,20 +1,11 @@
-import { CategoryId } from "@/context/admin/category/domain/category-id";
-import { ProductId } from "@/context/admin/product/domain/product-id";
+import { Identifier } from "@/shared/domain/value-object";
 
 export class ProductCategoryRemoverRequest {
-  private _productId: ProductId;
-  private _categoryId: CategoryId;
+  public readonly productId: Identifier;
+  public readonly categoryId: Identifier;
 
   constructor(productId: string, categoryId: string) {
-    this._productId = new ProductId(productId);
-    this._categoryId = new CategoryId(categoryId);
-  }
-
-  productId() {
-    return this._productId;
-  }
-
-  categoryId() {
-    return this._categoryId;
+    this.productId = new Identifier(productId);
+    this.categoryId = new Identifier(categoryId);
   }
 }

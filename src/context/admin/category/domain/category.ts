@@ -1,17 +1,8 @@
-import { CategoryId } from "./category-id";
-import { CategoryName } from "./category-name";
+import { Identifier, StringValue } from "@/shared/domain/value-object";
 
 export class Category {
   constructor(
-    private readonly _id: CategoryId,
-    private readonly _name: CategoryName
+    public readonly id: Identifier,
+    public readonly name: StringValue
   ) {}
-
-  id() {
-    return this._id;
-  }
-
-  name() {
-    return this._name;
-  }
 }

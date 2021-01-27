@@ -5,10 +5,10 @@ export class ProductFinderResponse {
 
   response() {
     return {
-      id: this.input.id().primitive(),
-      name: this.input.name().primitive(),
-      price: this.input.price().primitive(),
-      categories: this.input.categories().primitive(),
+      id: this.input.id.primitive(),
+      name: this.input.name.primitive(),
+      price: this.input.price.primitive(),
+      categories: this.input.categories.primitive(),
     };
   }
 }

@@ -1,13 +1,9 @@
-import { CategoryId } from "../../domain/category-id";
+import { Identifier } from "@/shared/domain/value-object";
 
 export class CategoryFinderRequest {
-  private readonly _id: CategoryId;
+  public readonly id: Identifier;
 
   constructor(id: string) {
-    this._id = new CategoryId(id);
-  }
-
-  id() {
-    return this._id;
+    this.id = new Identifier(id);
   }
 }

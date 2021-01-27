@@ -1,19 +1,20 @@
-import { CategoryId } from "@/context/admin/category/domain/category-id";
+import { Identifier, ValueObject } from "@/shared/domain/value-object";
 
-export class ProductCategoriesId {
-  private _categories: CategoryId[] = [];
-
-  constructor(categories: string[]) {
-    for (let categoryId of categories) {
-      this._categories.push(new CategoryId(categoryId));
+export class ProductCategoriesId extends ValueObject<string[], Identifier[]> {
+  cast() {
+    if (!Array.isArray(this.rawValue)) {
+      throw new Error("Categorias no es una lista");
     }
+
+    let value: Identifier[] = [];
+    for (let categoryId of this.rawValue) {
+      value.push(new Identifier(categoryId));
+    }
+
+    return value;
   }
 
-  value() {
-    return this._categories;
-  }
-
-  primitive() {
-    return this._categories.map((obj) => obj.value());
+  primitive(): string[] {
+    return this.value.map((v) => v.primitive());
   }
 }

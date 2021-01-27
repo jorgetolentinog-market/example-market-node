@@ -1,9 +1,10 @@
-import { ProductId } from "@/context/admin/product/domain/product-id";
-import { ProductName } from "@/context/admin/product/domain/product-name";
-import { ProductPrice } from "@/context/admin/product/domain/product-price";
 import { ProductRepository } from "@/context/admin/product/domain/product-repository";
+import {
+  Identifier,
+  NumberValue,
+  StringValue,
+} from "@/shared/domain/value-object";
 import { DynamoDBClient } from "@/shared/infrasctructure/dynamodb";
-import { CategoryId } from "../../category/domain/category-id";
 import { Product } from "../domain/product";
 import { ProductCategoriesId } from "../domain/product-categories-id";
 
@@ -12,15 +13,15 @@ export class DynamoProductRepository implements ProductRepository {
     await DynamoDBClient.put({
       TableName: "product",
       Item: {
-        id: product.id().primitive(),
-        name: product.name().primitive(),
-        price: product.price().primitive(),
-        categories: product.categories().primitive(),
+        id: product.id.primitive(),
+        name: product.name.primitive(),
+        price: product.price.primitive(),
+        categories: product.categories.primitive(),
       },
     }).promise();
   }
 
-  async find(id: ProductId) {
+  async find(id: Identifier) {
     let result = await DynamoDBClient.get({
       TableName: "product",
       Key: {
@@ -33,9 +34,9 @@ export class DynamoProductRepository implements ProductRepository {
     }
 
     return new Product(
-      new ProductId(result.Item.id),
-      new ProductName(result.Item.name),
-      new ProductPrice(result.Item.price),
+      new Identifier(result.Item.id),
+      new StringValue(result.Item.name),
+      new NumberValue(result.Item.price),
       new ProductCategoriesId(result.Item.categories)
     );
   }
@@ -49,23 +50,23 @@ export class DynamoProductRepository implements ProductRepository {
     return result.Items!.map(
       (item) =>
         new Product(
-          new ProductId(item.id),
-          new ProductName(item.name),
-          new ProductPrice(item.price),
+          new Identifier(item.id),
+          new StringValue(item.name),
+          new NumberValue(item.price),
           new ProductCategoriesId(item.categories)
         )
     );
   }
 
   async removeCategory(
-    productId: ProductId,
-    categoryId: CategoryId
+    productId: Identifier,
+    categoryId: Identifier
   ): Promise<void> {
     let product = await this.find(productId);
     if (!product) {
       throw new Error("Producto no encontrado");
     }
-    let categories = product.categories().primitive();
+    let categories = product.categories.primitive();
 
     const index = categories.indexOf(categoryId.primitive());
     if (index > -1) {
@@ -75,7 +76,7 @@ export class DynamoProductRepository implements ProductRepository {
     await DynamoDBClient.update({
       TableName: "product",
       Key: {
-        id: product.id().primitive(),
+        id: product.id.primitive(),
       },
       UpdateExpression: "SET #categories = :categories",
       ExpressionAttributeNames: {

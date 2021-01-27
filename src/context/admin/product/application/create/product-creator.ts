@@ -7,10 +7,10 @@ export class ProductCreator {
 
   async create(request: ProductCreatorRequest): Promise<void> {
     let product = new Product(
-      request.id(),
-      request.name(),
-      request.price(),
-      request.categories()
+      request.id,
+      request.name,
+      request.price,
+      request.categories
     );
     await this.repository.save(product);
   }

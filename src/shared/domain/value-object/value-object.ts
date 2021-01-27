@@ -1,17 +1,15 @@
-export abstract class ValueObject<T, N extends string> {
-  //protected __nominal: N;
+export abstract class ValueObject<Input, Output> {
+  public readonly value: Output;
 
-  constructor(private readonly _value: T) {
-    this.validate(_value);
+  constructor(public readonly rawValue: Input) {
+    this.value = this.cast();
   }
 
-  value(): T {
-    return this._value;
+  cast(): Output {
+    return (this.rawValue as unknown) as Output;
   }
 
-  primitive(): T {
-    return this._value;
+  primitive(): any {
+    throw new Error("Not implemented");
   }
-
-  validate(_: T) {}
 }

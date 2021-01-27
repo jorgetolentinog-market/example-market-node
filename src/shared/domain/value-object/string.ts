@@ -1,12 +1,15 @@
 import { ValueObject } from "./value-object";
 
-export abstract class StringValueObject<N extends string> extends ValueObject<
-  string,
-  N
-> {
-  validate(value: string) {
-    if (typeof value !== "string") {
+export class StringValue extends ValueObject<string, string> {
+  cast() {
+    if (typeof this.rawValue !== "string") {
       throw new Error("Texto inválido");
     }
+
+    return this.rawValue;
+  }
+
+  primitive() {
+    return this.value;
   }
 }

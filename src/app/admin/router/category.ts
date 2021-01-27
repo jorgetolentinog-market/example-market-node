@@ -15,20 +15,20 @@ const router = Router();
 router.get(
   "/category/:categoryId",
   asyncHandler(async (req, res) => {
-    let action = new CategoryFinder(repository);
-    let result = await action.find(
+    let finder = new CategoryFinder(repository);
+    let result = await finder.find(
       new CategoryFinderRequest(req.params.categoryId)
     );
-    res.status(200).send(result.response());
+    res.status(200).send(result);
   })
 );
 
 router.get(
   "/category",
   asyncHandler(async (req, res) => {
-    let action = new CategorySearcher(repository);
-    let result = await action.search();
-    res.status(200).send(result.response());
+    let searcher = new CategorySearcher(repository);
+    let result = await searcher.search();
+    res.status(200).send(result);
   })
 );
 
@@ -36,8 +36,8 @@ router.post(
   "/category",
   asyncHandler(async (req, res) => {
     let id = uuidv4();
-    let action = new CategoryCreator(repository);
-    await action.create(new CategoryCreatorRequest(id, req.body.name));
+    let creator = new CategoryCreator(repository);
+    await creator.create(new CategoryCreatorRequest(id, req.body.name));
     res.status(201).send({
       id,
     });
