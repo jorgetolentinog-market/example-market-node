@@ -1,22 +1,24 @@
+import { ProductFinder } from "@/context/admin/product-query/application/find/product-finder";
+import { ProductFinderRequest } from "@/context/admin/product-query/application/find/product-finder-request";
+import { ProductSearcher } from "@/context/admin/product-query/application/search/product-searcher";
+import { DynamoProductQueryRepository } from "@/context/admin/product-query/infrastructure/dynamo-product-query-repository";
 import { ProductCategoryRemover } from "@/context/admin/product/application/category-remove/category-remover";
 import { ProductCategoryRemoverRequest } from "@/context/admin/product/application/category-remove/category-remover-requet";
 import { ProductCreator } from "@/context/admin/product/application/create/product-creator";
 import { ProductCreatorRequest } from "@/context/admin/product/application/create/product-creator-request";
-import { ProductFinder } from "@/context/admin/product/application/find/product-finder";
-import { ProductFinderRequest } from "@/context/admin/product/application/find/product-finder-request";
-import { ProductSearcher } from "@/context/admin/product/application/search/product-searcher";
 import { DynamoProductRepository } from "@/context/admin/product/infrasctructure/dynamo-product-repository";
 import { asyncHandler } from "@/shared/infrasctructure/express";
 import { Router } from "express";
 import { v4 as uuidv4 } from "uuid";
 
 const productRepository = new DynamoProductRepository();
+const productQueryRepository = new DynamoProductQueryRepository();
 const router = Router();
 
 router.get(
   "/product/:productId",
   asyncHandler(async (req, res) => {
-    let action = new ProductFinder(productRepository);
+    let action = new ProductFinder(productQueryRepository);
     let result = await action.find(
       new ProductFinderRequest(req.params.productId)
     );
@@ -27,7 +29,7 @@ router.get(
 router.get(
   "/product",
   asyncHandler(async (req, res) => {
-    let action = new ProductSearcher(productRepository);
+    let action = new ProductSearcher(productQueryRepository);
     let result = await action.search();
     res.send(result.response());
   })
