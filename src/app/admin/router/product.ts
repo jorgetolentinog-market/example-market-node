@@ -1,6 +1,6 @@
-import { ProductFinder } from "@/context/admin/product-query/application/find/product-finder";
-import { ProductFinderRequest } from "@/context/admin/product-query/application/find/product-finder-request";
-import { ProductSearcher } from "@/context/admin/product-query/application/search/product-searcher";
+import { ProductQueryFinder } from "@/context/admin/product-query/application/find/product-query-finder";
+import { ProductQueryFinderRequest } from "@/context/admin/product-query/application/find/product-query-finder-request";
+import { ProductQuerySearcher } from "@/context/admin/product-query/application/search/product-query-searcher";
 import { DynamoProductQueryRepository } from "@/context/admin/product-query/infrastructure/dynamo-product-query-repository";
 import { ProductCategoryRemover } from "@/context/admin/product/application/category-remove/category-remover";
 import { ProductCategoryRemoverRequest } from "@/context/admin/product/application/category-remove/category-remover-requet";
@@ -18,9 +18,9 @@ const router = Router();
 router.get(
   "/product/:productId",
   asyncHandler(async (req, res) => {
-    let action = new ProductFinder(productQueryRepository);
+    let action = new ProductQueryFinder(productQueryRepository);
     let result = await action.find(
-      new ProductFinderRequest(req.params.productId)
+      new ProductQueryFinderRequest(req.params.productId)
     );
     res.send(result.response());
   })
@@ -29,7 +29,7 @@ router.get(
 router.get(
   "/product",
   asyncHandler(async (req, res) => {
-    let action = new ProductSearcher(productQueryRepository);
+    let action = new ProductQuerySearcher(productQueryRepository);
     let result = await action.search();
     res.send(result.response());
   })

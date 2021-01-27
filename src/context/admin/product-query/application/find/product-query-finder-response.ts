@@ -1,6 +1,6 @@
 import { ProductQuery } from "../../domain/product-query";
 
-export class ProductFinderResponse {
+export class ProductQueryFinderResponse {
   constructor(private readonly input: ProductQuery) {}
 
   response() {

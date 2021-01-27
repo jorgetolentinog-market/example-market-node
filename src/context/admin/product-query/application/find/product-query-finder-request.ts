@@ -1,6 +1,6 @@
 import { Identifier } from "@/shared/domain/value-object";
 
-export class ProductFinderRequest {
+export class ProductQueryFinderRequest {
   public readonly id: Identifier;
 
   constructor(id: string) {
