@@ -1,37 +1,37 @@
-import { ProductQueryFinder } from "@/context/admin/product-query/application/find/product-query-finder";
-import { ProductQueryFinderRequest } from "@/context/admin/product-query/application/find/product-query-finder-request";
-import { ProductQuerySearcher } from "@/context/admin/product-query/application/search/product-query-searcher";
-import { DynamoProductQueryRepository } from "@/context/admin/product-query/infrastructure/dynamo-product-query-repository";
+import { DynamoCategoryRepository } from "@/context/admin/category/infrastructure/dynamo-category-repository";
 import { ProductCategoryRemover } from "@/context/admin/product/application/category-remove/category-remover";
 import { ProductCategoryRemoverRequest } from "@/context/admin/product/application/category-remove/category-remover-requet";
 import { ProductCreator } from "@/context/admin/product/application/create/product-creator";
 import { ProductCreatorRequest } from "@/context/admin/product/application/create/product-creator-request";
+import { ProductFinder } from "@/context/admin/product/application/find/product-finder";
+import { ProductFinderRequest } from "@/context/admin/product/application/find/product-finder-request";
+import { ProductSearcher } from "@/context/admin/product/application/search/product-searcher";
 import { DynamoProductRepository } from "@/context/admin/product/infrasctructure/dynamo-product-repository";
 import { asyncHandler } from "@/shared/infrasctructure/express";
 import { Router } from "express";
 import { v4 as uuidv4 } from "uuid";
 
 const productRepository = new DynamoProductRepository();
-const productQueryRepository = new DynamoProductQueryRepository();
+const categoryRepository = new DynamoCategoryRepository();
 const router = Router();
 
 router.get(
   "/product/:productId",
   asyncHandler(async (req, res) => {
-    let action = new ProductQueryFinder(productQueryRepository);
-    let result = await action.find(
-      new ProductQueryFinderRequest(req.params.productId)
+    let action = new ProductFinder(productRepository, categoryRepository);
+    let response = await action.find(
+      new ProductFinderRequest(req.params.productId)
     );
-    res.send(result.response());
+    res.send(response);
   })
 );
 
 router.get(
   "/product",
   asyncHandler(async (req, res) => {
-    let action = new ProductQuerySearcher(productQueryRepository);
-    let result = await action.search();
-    res.send(result.response());
+    let action = new ProductSearcher(productRepository, categoryRepository);
+    let response = await action.search();
+    res.send(response);
   })
 );
 
